@@ -5,7 +5,25 @@ categories: Python
 ---
 
 # 需求
-有时候我们自己本机部署了python环境进行相关开发，但是想让自己开发的东西在别人机器上运行，又不想自己再去配置相应的开发环境(尤其是离线的机器上，这里以pc为主,linux等机器上docker也是OK)，这里正好看到了python embeddable版本。里面只包含了必要的运行环境。
+&emsp;&emsp;有时候我们自己本机部署了python环境进行相关开发，但是想让自己开发的东西在别人机器上运行，又不想自己再去配置相应的开发环境(尤其是离线的机器上，这里以pc为主,linux等机器上docker也是OK)。  
+&emsp;&emsp;在下在python3.6.3版本的时候正好看到了python embeddable版本,里面只包含了必要的运行环境,如果想用第三方包，只需要将相关的第三方包配置到具体路径下就行了。其相关包目录截图如下。
+![](../images/python/embend_env_config/1.png)
+
+# 具体步骤
+## 1.修改python36._pth
+
+&emsp;&emsp;打开python36._pth文件将其中#import site中的#号去掉（其他有embed版本的python对应的._pth文件为pythonxx._pth）
+## 2.安装pip
+
+&emsp;&emsp;官网是说通过get-pip.py进行相关的下载安装。这里给出相应的下载链接[get-pip.py](https://bootstrap.pypa.io/get-pip.py)打开后将其内容拷贝存到本地embed目录下创建的get-pip.py文件内。  
+&emsp;&emsp;然后在这个目录下执行如下命令  
+`python get-pip.py`  
+程序会将相关的包下载到目录内
+## 3.安装第三方包
+在这个目录下执行命令行 `python -m pip install 相应的包名`就会将包安装到这个目录下的Lib/site-packages中（如果没有会制动生成）和相关的可执行exe程序在Scripts目录下（如果没有会制动生成）。
+## 4.注意事项
+因为没有在系统中配置相应的python环境，所以要运行要将python 制定到这个embed目录下，其实自己将这个目录配置到windows的path环境中也能达到相应的效果。
+
 # 官网对程序查找模块的阐述（Finding modules）[官网地址](https://docs.python.org/3/using/windows.html)
 
 ## 3.5. Finding modules
