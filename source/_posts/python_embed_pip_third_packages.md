@@ -22,23 +22,29 @@ categories: Python
 ## 3.安装第三方包
 在这个目录下执行命令行 `python -m pip install 相应的包名`就会将包安装到这个目录下的Lib/site-packages中（如果没有会制动生成）和相关的可执行exe程序在Scripts目录下（如果没有会制动生成）。
 ## 4.注意事项
-因为没有在系统中配置相应的python环境，所以要运行要将python 制定到这个embed目录下，其实自己将这个目录配置到windows的path环境中也能达到相应的效果。
+因为没有在系统中配置相应的python环境，所以要运行要将python 指定到这个embed目录下，其实自己将这个目录配置到windows的path环境中也能达到相应的效果。
 
 # 官网对程序查找模块的阐述（Finding modules）[官网地址](https://docs.python.org/3/using/windows.html)
 
 ## 3.5. Finding modules
 Python usually stores its library (and thereby your site-packages folder) in the installation directory. So, if you had installed Python to C:\Python\, the default library would reside in C:\Python\Lib\ and third-party modules should be stored in C:\Python\Lib\site-packages\.
 
+通常python在它的安装目录存储它的library（也就是你的site-packages文件夹）。所以，如果你已经安装python到C:\Python\，默认的library就存放在C:\Python\Lib\，第三方模块（即第三方包）就会被存储在C:\Python\Lib\site-packages\。
 To completely override sys.path, create a ._pth file with the same name as the DLL (python36._pth) or the executable (python._pth) and specify one line for each path to add to sys.path. The file based on the DLL name overrides the one based on the executable, which allows paths to be restricted for any program loading the runtime if desired.
-
+为了完全覆盖sys.path,你你可以创建一个后缀名为._pth的文化文件，文件名为相应的python版本的dll名（如我下载的是python3.6.3，上图截图显示，对应有一个python36的dll，这个python3就是要填写的文件名），或者是可执行的(python._pth) 并且详细在一行写出每个要添加到sys.path的路径。._pth文件将为那些我们希望在运行时被加载的程序指定具体的路径，注意这个基于DLL名的文件(DLL名称._pth)将覆盖基于可执行文件的_.pth(python._pth)。
 When the file exists, all registry and environment variables are ignored, isolated mode is enabled, and site is not imported unless one line in the file specifies import site. Blank paths and lines starting with # are ignored. Each path may be absolute or relative to the location of the file. Import statements other than to site are not permitted, and arbitrary code cannot be specified.
+当._pth文件存在的时候，python的所有记录(???)和环境变量将被忽略，分离模块的功能将被启用，并且site将不会被imported，除非在这个文件内(._pth)定义一行import site。（注意：这个site指的是加载第三方包的文件目录，即Lib\site-packages）。空白处和被#标记的行在读取相关配置的时候将被忽略。每个定位到文件的路径可以是绝对路径，也可以是相对路径。除了是对site目录的声明，其他的Import的声明都不被允许，而且不能再这个文件内随意写代码相关（即import声明只是为了定义加载第三方包的路径）。
 
 Note that .pth files (without leading underscore) will be processed normally by the site module.
+注意.pht(没有下划线)将被site moudle正常处理。（？？？）
 
 When no ._pth file is found, this is how sys.path is populated on Windows:
+当._pth没有被找到时，下面将细说在Windows中sys.path如何被定为的。
 
 - An empty entry is added at the start, which corresponds to the current directory.
+- 在开始时添加一个空条目，该条目对应当前目录。
 - If the environment variable PYTHONPATH exists, as described in Environment variables, its entries are added next. Note that on Windows, paths in this variable must be separated by semicolons, to distinguish them from the colon used in drive identifiers (C:\ etc.).
+- 如果环境变量PYTHONPATH存在，在环境变量中,他将被加在系统环境变量的下。注意，在Windows中，这个变量的路径必须以分号隔开，以区别于用于驱动器标识符的冒号（C：\...）。
 - Additional “application paths” can be added in the registry as subkeys of \SOFTWARE\Python\PythonCore\version\PythonPath under both the HKEY_CURRENT_USER and HKEY_LOCAL_MACHINE hives. Subkeys which have semicolon-delimited path strings as their default value will cause each path to be added to sys.path. (Note that all known installers only use HKLM, so HKCU is typically empty.)
 - If the environment variable PYTHONHOME is set, it is assumed as “Python Home”. Otherwise, the path of the main Python executable is used to locate a “landmark file” (either Lib\os.py or pythonXY.zip) to deduce the “Python Home”. If a Python home is found, the relevant sub-directories added to sys.path (Lib, plat-win, etc) are based on that folder. Otherwise, the core Python path is constructed from the PythonPath stored in the registry.
 - If the Python Home cannot be located, no PYTHONPATH is specified in the environment, and no registry entries can be found, a default path with relative entries is used (e.g. .\Lib;.\plat-win, etc).
