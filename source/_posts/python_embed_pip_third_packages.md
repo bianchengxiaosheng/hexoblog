@@ -33,7 +33,7 @@ Python usually stores its library (and thereby your site-packages folder) in the
 To completely override sys.path, create a ._pth file with the same name as the DLL (python36._pth) or the executable (python._pth) and specify one line for each path to add to sys.path. The file based on the DLL name overrides the one based on the executable, which allows paths to be restricted for any program loading the runtime if desired.
 为了完全覆盖sys.path,你你可以创建一个后缀名为._pth的文化文件，文件名为相应的python版本的dll名（如我下载的是python3.6.3，上图截图显示，对应有一个python36的dll，这个python3就是要填写的文件名），或者是可执行的(python._pth) 并且详细在一行写出每个要添加到sys.path的路径。._pth文件将为那些我们希望在运行时被加载的程序指定具体的路径，注意这个基于DLL名的文件(DLL名称._pth)将覆盖基于可执行文件的_.pth(python._pth)。
 When the file exists, all registry and environment variables are ignored, isolated mode is enabled, and site is not imported unless one line in the file specifies import site. Blank paths and lines starting with # are ignored. Each path may be absolute or relative to the location of the file. Import statements other than to site are not permitted, and arbitrary code cannot be specified.
-当._pth文件存在的时候，python的所有记录(???)和环境变量将被忽略，分离模块的功能将被启用，并且site将不会被imported，除非在这个文件内(._pth)定义一行import site。（注意：这个site指的是加载第三方包的文件目录，即Lib\site-packages）。空白处和被#标记的行在读取相关配置的时候将被忽略。每个定位到文件的路径可以是绝对路径，也可以是相对路径。除了是对site目录的声明，其他的Import的声明都不被允许，而且不能再这个文件内随意写代码相关（即import声明只是为了定义加载第三方包的路径）。
+当._pth文件存在的时候，python的所有注册和环境变量将被忽略，分离模块的功能将被启用，并且site将不会被imported，除非在这个文件内(._pth)定义一行import site。（注意：这个site指的是加载第三方包的文件目录，即Lib\site-packages）。空白处和被#标记的行在读取相关配置的时候将被忽略。每个定位到文件的路径可以是绝对路径，也可以是相对路径。除了是对site目录的声明，其他的Import的声明都不被允许，而且不能再这个文件内随意写代码相关（即import声明只是为了定义加载第三方包的路径）。
 
 Note that .pth files (without leading underscore) will be processed normally by the site module.
 注意.pht(没有下划线)将被site moudle正常处理。（？？？）
@@ -44,16 +44,23 @@ When no ._pth file is found, this is how sys.path is populated on Windows:
 - An empty entry is added at the start, which corresponds to the current directory.
 - 在开始时添加一个空条目，该条目对应当前目录。
 - If the environment variable PYTHONPATH exists, as described in Environment variables, its entries are added next. Note that on Windows, paths in this variable must be separated by semicolons, to distinguish them from the colon used in drive identifiers (C:\ etc.).
-- 如果环境变量PYTHONPATH存在，在环境变量中,他将被加在系统环境变量的下。注意，在Windows中，这个变量的路径必须以分号隔开，以区别于用于驱动器标识符的冒号（C：\...）。
+- 如果环境变量PYTHONPATH存在，在环境变量中,他将被加在系统环境变量的下。注意，在Windows中，这个变量的路径必须以分号隔开，以区别于用于驱动器标识符的冒号（C:\ ...）。
 - Additional “application paths” can be added in the registry as subkeys of \SOFTWARE\Python\PythonCore\version\PythonPath under both the HKEY_CURRENT_USER and HKEY_LOCAL_MACHINE hives. Subkeys which have semicolon-delimited path strings as their default value will cause each path to be added to sys.path. (Note that all known installers only use HKLM, so HKCU is typically empty.)
+- 额外的“应用程序路径”可以添加在注册表中的\SOFTWARE\Python\PythonCore\version\PythonPath子项下的HKEY_CURRENT_USER和HKEY_LOCAL_MACHINE。分号分隔的子路径字符串作为其默认值将导致每个路径被添加到sys.path。（注意，所有已知的安装程序只使用HKLM，所以HKCU通常是空的。）(HKLM指的是HKEY_LOCAL_MACHINE，HKCU指的是HKEY_CURRENT_USER)
 - If the environment variable PYTHONHOME is set, it is assumed as “Python Home”. Otherwise, the path of the main Python executable is used to locate a “landmark file” (either Lib\os.py or pythonXY.zip) to deduce the “Python Home”. If a Python home is found, the relevant sub-directories added to sys.path (Lib, plat-win, etc) are based on that folder. Otherwise, the core Python path is constructed from the PythonPath stored in the registry.
+- 如果环境变量PYTHONHOME设置，它被假定为“Python Home”。否则，Python的执行程序通过定位一个“landmark file”（无论是Lib\os.py 或pythonXY.zip）去推导出“Python的 Home”。如果一个Python Home被发现，相关被添加到sys.path的子目录（Lib, plat-win, etc）都是基于这个文件夹。否则，核心Python path是通过存储在注册表中的路径来构建。
 - If the Python Home cannot be located, no PYTHONPATH is specified in the environment, and no registry entries can be found, a default path with relative entries is used (e.g. .\Lib;.\plat-win, etc).
 If a pyvenv.cfg file is found alongside the main executable or in the directory one level above the executable, the following variations apply:
+- 如果Python Home不能定位，没有指定PYTHONPATH在环境变量中，也没有注册表项可以发现，一个相对项默认路径将被使用（e.g. .\Lib;.\plat-win, etc）。
 
+如果一个pyvenv.cfg文件被发现与主可执行文件同级目录或在可执行文件的父级目录之上的目录，以下变化将被应用：
 - If home is an absolute path and PYTHONHOME is not set, this path is used instead of the path to the main executable when deducing the home location.
 The end result of all this is:
+- 如果home是绝对路径，并且PYTHONHOME没有被设置，当主执行程序推断运行环境目录时下面的路径将被使用
+所有结果如下：
 
 - When running python.exe, or any other .exe in the main Python directory (either an installed version, or directly from the PCbuild directory), the core path is deduced, and the core paths in the registry are ignored. Other “application paths” in the registry are always read.
+- 当运行python.exe，或在主python目录下的其它.exe（无论是安装版，或直接从PCbuild目录下），推导出核心路径时注册表的核心路径将被忽略。注册表中的其他“application paths”总是被读取。（？？）
 - When Python is hosted in another .exe (different directory, embedded via COM, etc), the “Python Home” will not be deduced, so the core path from the registry is used. Other “application paths” in the registry are always read.
 - If Python can’t find its home and there are no registry value (frozen .exe, some very strange installation setup) you get a path with some default, but relative, paths.
 
