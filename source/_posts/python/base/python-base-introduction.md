@@ -1,3 +1,10 @@
+---
+title: python base 之 Python简介
+date: 2016-01-10 14:12:41
+categories: Python
+tags: [Python]
+---
+
 Python 简介
 ===========
 

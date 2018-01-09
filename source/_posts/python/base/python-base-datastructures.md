@@ -1,3 +1,10 @@
+---
+title: python base 之数据结构
+date: 2016-01-10 14:12:41
+categories: Python
+tags: [Python]
+---
+
 数据结构
 ========
 

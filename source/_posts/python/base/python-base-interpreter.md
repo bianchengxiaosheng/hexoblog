@@ -1,6 +1,10 @@
-{}
-date: 2018-01-09 19:52:12
 ---
+title: python base 之 Python解释器
+date: 2016-01-10 14:12:41
+categories: Python
+tags: [Python]
+---
+
 使用 Python 解释器
 ==================
 

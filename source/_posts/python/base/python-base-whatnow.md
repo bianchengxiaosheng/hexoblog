@@ -1,5 +1,8 @@
-{}
-date: 2018-01-05 10:38:11
+---
+title: python base 之 Next
+date: 2016-01-10 14:12:41
+categories: Python
+tags: [Python]
 ---
 
 ---

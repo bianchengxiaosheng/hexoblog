@@ -1,7 +1,8 @@
-title: python_base_index
-author: gwl
-date: 2018-01-03 23:29:13
-tags:
+---
+title: python base 之 入门指南
+date: 2016-01-10 14:12:41
+categories: Python
+tags: [Python]
 ---
 Python 入门指南
 ===============

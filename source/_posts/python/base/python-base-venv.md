@@ -1,5 +1,8 @@
-{}
-date: 2018-01-09 19:45:59
+---
+title: python base 之 虚拟环境和包
+date: 2016-01-10 14:12:41
+categories: Python
+tags: [Python]
 ---
 虚拟环境和包
 ============

@@ -1,3 +1,10 @@
+---
+title: python base 之 交互式输入行编辑历史回溯
+date: 2016-01-10 14:12:41
+categories: Python
+tags: [Python]
+---
+
 交互式输入行编辑历史回溯
 ========================
 

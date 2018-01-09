@@ -1,3 +1,9 @@
+---
+title: python base 之类的概念
+date: 2016-01-10 14:12:41
+categories: Python
+tags: [Python]
+---
 类
 ==
 

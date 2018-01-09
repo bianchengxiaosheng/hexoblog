@@ -1,3 +1,9 @@
+---
+title: python base 之 浮点数算法：争议和限制
+date: 2016-01-10 14:12:41
+categories: Python
+tags: [Python]
+---
 浮点数算法：争议和限制
 ======================
 
