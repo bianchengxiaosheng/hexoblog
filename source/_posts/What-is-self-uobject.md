@@ -15,7 +15,7 @@ date: 2018-01-03 22:46:00
 将在内部搜索'TextRenderComponent' class(通过unreal c++的反射原理)，当搜索到的时候，它会在缓存中检查其是否可以通过map获取，如果缓存中没有，它将创建一个新的ue_PyUObject并将相应的对应关系通过map放入内存的缓存中。  
 通过上述例子，'text_render_component'会保持一种到UObject的映射(也就是一个UClass)。  
 注意：在你的python class中，你映射到的PyActor (or PyPawn, PyCharacter or PyComponent)并不是上述的
-ue_PyUObject。它是一个传统的（未完待续）
+ue_PyUObject。它是一个传统的python class,只不过它有一个关联到ue_PyUObject映射的object引用（通过uobject获取）。最准确的通过技术来描述这个这些classes可以称之为'proxy(代理)'。
 Pay attention: the python class you map to the PyActor (or PyPawn, PyCharacter or PyComponent), is not a ue_PyUObject. It is a classic python class that holds a reference (via the 'uobject' field) to the related ue_PyUObject mapped object. The best technical term to describe those classes is 'proxy'.
 
 Note about 'uobject' from now on
