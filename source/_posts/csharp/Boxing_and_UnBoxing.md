@@ -1,5 +1,10 @@
 
 date: 2018-01-09 19:32:21
+tags:
+  - 'c#'
+categories:
+- c# 
+title: C#装箱（Boxing）与拆箱（UnBoxing） 
 ---
 # C#装箱（Boxing）与拆箱（UnBoxing）
 ## 1、什么是装箱和拆箱？
@@ -31,7 +36,7 @@ Console.WriteLine ("num: {0}", num); //num: 100
  值类型只会在栈中分配。 引用类型分配内存与托管堆。（托管堆对应于垃圾回收。）
  
 装箱操作： 
-![](../../images/c#/Boxing_and_unboxing/box.png)
+![](Boxing_and_UnBoxing/box.png)
 
 
     PS：o 和 i 的改变将互不影响，因为装箱使用的是 i 的一个副本。
@@ -41,7 +46,8 @@ Console.WriteLine ("num: {0}", num); //num: 100
 * 2：然后将值类型的数据拷贝到刚刚分配的内存中。 
 * 3：返回托管堆中新分配对象的地址。这个地址就是一个指向对象的引用了。
 可以看出，进行一次装箱要进行分配内存和拷贝数据这两项比较影响性能的操作。
-拆箱操作： 
+拆箱操作：
+![](Boxing_and_UnBoxing/unbox.png)
 
     PS：o 和 i 的改变将互不影响（已验证）。
 
