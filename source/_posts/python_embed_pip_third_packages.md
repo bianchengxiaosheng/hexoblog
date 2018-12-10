@@ -1,18 +1,21 @@
 ---
 title: python环境部署到其他机器上不用安装环境（以python3.6.3版本测试）
 date: 2017-01-19 14:12:41
-categories: Python
+tags:
+- Python
+categories: 
+- Python
 ---
 
 # 需求
 &emsp;&emsp;有时候我们自己本机部署了python环境进行相关开发，但是想让自己开发的东西在别人机器上运行，又不想自己再去配置相应的开发环境(尤其是离线的机器上，这里以pc为主,linux等机器上docker也是OK)。  
-&emsp;&emsp;在下在python3.6.3版本的时候正好看到了python embeddable版本,里面只包含了必要的运行环境,如果想用第三方包，只需要将相关的第三方包配置到具体路径下就行了。其相关包目录截图如下。
+&emsp;&emsp;在下载python3.6.3版本的时候正好看到了python embeddable版本,里面只包含了必要的运行环境,如果想用第三方包，只需要将相关的第三方包配置到具体路径下就行了。其相关包目录截图如下。
 ![](../images/python/embend_env_config/1.png)
 
 # 具体步骤
 ## 1.修改python36._pth
 
-&emsp;&emsp;打开python36._pth文件将其中#import site中的#号去掉（其他有embed版本的python对应的._pth文件为pythonxx._pth）
+&emsp;&emsp;打开python36._pth文件将其中#import site中的#号去掉（其他有embed版本的python对应的._pth文件为pythonxx._pth，与对应的DLL名称相同）
 ## 2.安装pip
 
 &emsp;&emsp;官网是说通过get-pip.py进行相关的下载安装。这里给出相应的下载链接[get-pip.py](https://bootstrap.pypa.io/get-pip.py)打开后将其内容拷贝存到本地embed目录下创建的get-pip.py文件内。  
