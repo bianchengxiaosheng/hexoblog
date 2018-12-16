@@ -2,7 +2,10 @@
 title: unreal4-python-create-blueprint-class-by-python
 date: 2017-12-29 11:52:35
 tags:
-categories: Unreal4
+- Unreal
+- Unreal Python
+categories: 
+- Unreal4
 ---
 # 通过python创建一个新的blueprint class
 

@@ -3,11 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: MyBlog
+title: Hexo
 subtitle:
 description:
-author: gwl
-language: zh-Hans
+keywords:
+author: John Doe
+language:
 timezone:
 
 # URL
@@ -42,13 +43,20 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace:
-
+  
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
+  
 # Category & Tag
 default_category: uncategorized
-category_map: 
+category_map:
 tag_map:
-
-
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
@@ -65,13 +73,9 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: landscape
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
-  repo: git@github.com:bianchengxiaosheng/bianchengxiaosheng.github.io.git
-# post_asset_folder: true
-
-
+  type:
