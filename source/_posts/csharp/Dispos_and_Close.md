@@ -1,5 +1,14 @@
-C#资源释放及Dispose、Close和析构方法
+title: C#资源释放及Dispose、Close
+author: gwl
+tags:
+  - c#
+categories:
+  - c#
+date: 2018-01-09 19:41:00
+---
 
+## C#资源释放及Dispose、Close和析构方法
+---
  
 
 备注：此文的部分观点有误，之所以仍旧保留本文，是需要在后期给出一个勘误版。正确的版本在这里“C#中标准Dispose模式的实现”

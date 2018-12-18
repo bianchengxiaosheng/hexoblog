@@ -1,8 +1,9 @@
 title: close_bag
 author: gwl
 tags:
-  - 'c#'
-categories: []
+  - c#
+categories:
+ - c#
 date: 2018-01-09 19:41:00
 ---
 [转自](http://blog.csdn.net/cjolj/article/details/60868305)
